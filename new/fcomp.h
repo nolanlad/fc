@@ -1,8 +1,13 @@
 #ifndef __FCOMP_H__
 #define __FCOMP_H__
 #include <stdio.h>
-#include "blocks/static_blocks.h"
-
+#include "../blocks/static_blocks.h"
+typedef enum {
+    VARINIT,
+    FUNCDEF,
+    RET,
+    VARASSN
+} codetype;
 
 typedef struct token{
     int id;

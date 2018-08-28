@@ -4,9 +4,10 @@
 	#include <math.h>
 	#include <string.h>
         #include "fcomp.h"
-        #include "blocks/static_blocks.h"
+        #include "../blocks/static_blocks.h"
 
 	void yyerror(char *); 
+        void print_code(var_init  * v);
         void var_init_c(var_init * v);
         void reset();
 	int yylex(void);
@@ -38,17 +39,22 @@ assignment:
 
        v.token_list = Token_block;
        v.r_type     = assign_type;
-       var_init_c(&v);
- }
+       v.eltype = VARINIT;
+       //var_init_c(&v);
+   }
    | args ASSIGN expression{ 
 
        v.token_list = Token_block;
        v.r_type     = assign_type;
-       var_init_c(&v);
- }
+       v.eltype = VARINIT;
+       //var_init_c(&v);
+   }
    | VAR OPAREN args CPAREN   { printf("Func def\n");    }
    | VAR                      { printf("Func def\n");    }
-   | NEWLINE                  { reset();                 }
+   | NEWLINE{ 
+          print_code(&v);
+          reset();                 
+   }
    | IF expression            { printf("If block\n");    }
    ;
 args:
@@ -106,6 +112,13 @@ void var_init_c(var_init * v){
         
     }
     printf(";\n");
+}
+
+void print_code(var_init  * v){
+    if(v->eltype == VARINIT)
+        var_init_c(v);
+    else
+        printf("unimplemented code type");
 }
 
 void reset(){

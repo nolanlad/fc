@@ -4,7 +4,7 @@
 	#include "float.h"
 	#include "math.h"
 	#include <string.h>
-        #include "blocks/static_blocks.h"
+        #include "../blocks/static_blocks.h"
 	int yyparse();
         void set_token(int id, int sid);
         int scope = 0;
