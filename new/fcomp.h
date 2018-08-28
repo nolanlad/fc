@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include "blocks/static_blocks.h"
 
+
 typedef struct token{
     int id;
     int sid;
@@ -14,6 +15,14 @@ typedef struct parser{
     int idx;
 }  Parser;
 
+typedef struct __var_init{
+    struct blocked_Token * token_list;
+    int eltype;
+    int r_type;
+} var_init ;
+    
+
+        
 
 dynamic_block(Token);
 struct blocked_Token   * Token_block;
